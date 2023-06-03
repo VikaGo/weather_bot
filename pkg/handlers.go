@@ -24,12 +24,6 @@ func (b *Bot) handleCommand(message *tgbotapi.Message) error {
 	}
 }
 
-func (b *Bot) handleMessage(message *tgbotapi.Message) error {
-	msg := tgbotapi.NewMessage(message.Chat.ID, "I don't understand you. If you need /help, just choose the option.")
-	_, err := b.bot.Send(msg)
-	return err
-}
-
 func (b *Bot) handleStartCommand(message *tgbotapi.Message) error {
 	msg := tgbotapi.NewMessage(message.Chat.ID, "Weather forecast for any city with maps.\n☀⛅☔ Just enter a city name as 'text' or send as a 'location' to see the weather forecast 😃 👍")
 	_, err := b.bot.Send(msg)
