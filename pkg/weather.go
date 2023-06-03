@@ -29,11 +29,9 @@ func getWeatherForecastByCity(city string) (*weatherForecast, error) {
 		return nil, err
 	}
 
-	WeatherApi := os.Getenv("WeatherApi")
-
 	params := url.Values{}
 	params.Add("q", city)
-	params.Add("appid", WeatherApi)
+	params.Add("appid", os.Getenv("WAPI"))
 	params.Add("units", "metric")
 
 	apiURL.RawQuery = params.Encode()
