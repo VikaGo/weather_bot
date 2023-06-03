@@ -35,8 +35,7 @@ func (b *Bot) Start() error {
 			b.handleTextUpdate(update.Message)
 			continue
 		}
-
-		b.handleMessage(update.Message)
 	}
 	return nil
+	
 }
