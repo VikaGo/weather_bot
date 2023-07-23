@@ -1,4 +1,4 @@
-package pkg
+package geoapi
 
 import (
 	"encoding/json"
@@ -9,7 +9,7 @@ import (
 	"os"
 )
 
-func getCityName(latitude, longitude float64) (string, error) {
+func GetCityName(latitude, longitude float64) (string, error) {
 
 	baseURL, err := url.Parse("https://api.opencagedata.com/geocode/v1/json")
 	if err != nil {

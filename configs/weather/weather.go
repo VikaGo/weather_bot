@@ -1,7 +1,8 @@
-package pkg
+package weather
 
 import (
 	"encoding/json"
+	"github.com/VikaGo/weather_bot/configs/geoapi"
 	"io/ioutil"
 	"net/http"
 	"net/url"
@@ -10,7 +11,7 @@ import (
 	"time"
 )
 
-type weatherForecast struct {
+type WeatherForecast struct {
 	City        string
 	WeatherList []weatherData
 }
@@ -22,7 +23,7 @@ type weatherData struct {
 	Description string
 }
 
-func getWeatherForecastByCity(city string) (*weatherForecast, error) {
+func GetWeatherForecastByCity(city string) (*WeatherForecast, error) {
 	baseURL := "https://api.openweathermap.org/data/2.5/forecast"
 	apiURL, err := url.Parse(baseURL)
 	if err != nil {
@@ -69,7 +70,7 @@ func getWeatherForecastByCity(city string) (*weatherForecast, error) {
 		return nil, err
 	}
 
-	forecast := &weatherForecast{
+	forecast := &WeatherForecast{
 		City:        weatherResp.City.Name,
 		WeatherList: make([]weatherData, 0),
 	}
@@ -89,11 +90,11 @@ func getWeatherForecastByCity(city string) (*weatherForecast, error) {
 	return forecast, nil
 }
 
-func getWeatherForecastByLocation(latitude, longitude float64) (*weatherForecast, error) {
-	city, err := getCityName(latitude, longitude)
+func GetWeatherForecastByLocation(latitude, longitude float64) (*WeatherForecast, error) {
+	city, err := geoapi.GetCityName(latitude, longitude)
 	if err != nil {
 		return nil, err
 	}
 
-	return getWeatherForecastByCity(city)
+	return GetWeatherForecastByCity(city)
 }

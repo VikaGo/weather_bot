@@ -1,4 +1,4 @@
-package configs
+package config
 
 type Config struct {
 	TelegramToken       string `env:"TOKEN"`
