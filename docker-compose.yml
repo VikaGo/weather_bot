@@ -1,0 +1,26 @@
+version: '3.1'
+
+services:
+  mongo:
+    image: mongo:latest
+    restart: always
+    ports:
+      - "27017:27017"
+    env_file:
+      - .env
+    networks:
+      - mynetwork
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    depends_on:
+      - mongo
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+
